@@ -85,7 +85,7 @@
             /* На мобилке 1 колонка, на ПК — сколько влезет (минимум 300px каждая) */
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             justify-content: start;
-            gap: 12px;
+            gap: 12px 15px;
             width: 95%;
             max-width: 1000px; /* Чтобы на ультрашироких мониках не растягивалось в бесконечность */
         }
@@ -156,12 +156,26 @@
         }
     
         /* Классы для цветов рамок */
-        .orange { border-color: var(--rarity-orange); box-shadow: 0 0 5px rgba(255, 152, 0, 0.3); }
-        .purple { border-color: var(--rarity-purple); box-shadow: 0 0 5px rgba(156, 39, 176, 0.3); }
-        .blue   { border-color: var(--rarity-blue);   box-shadow: 0 0 5px rgba(33, 150, 243, 0.3); }
-        .green  { border-color: var(--rarity-green);  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
-        .white  { border-color: var(--rarity-white);  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
-
+        /* Белый цвет */
+        .white { border-color: #ffffff !important; box-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+        .white .item-icon { border-color: #ffffff !important; }
+        
+        /* Оранжевый / Рыжий */
+        .orange { border-color: #ff9800 !important; box-shadow: 0 0 5px rgba(255, 152, 0, 0.3); }
+        .orange .item-icon { border-color: #ff9800 !important; }
+        
+        /* Фиолетовый / Пурпурный */
+        .purple { border-color: #9c27b0 !important; box-shadow: 0 0 5px rgba(156, 39, 176, 0.3); }
+        .purple .item-icon { border-color: #9c27b0 !important; }
+        
+        /* Синий */
+        .blue { border-color: #2196f3 !important; box-shadow: 0 0 5px rgba(33, 150, 243, 0.3); }
+        .blue .item-icon { border-color: #2196f3 !important; }
+        
+        /* Зеленый */
+        .green { border-color: #4caf50 !important; box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
+        .green .item-icon { border-color: #4caf50 !important; }
+        
         .name { font-size: 14px; font-weight: bold; }
         .pts { font-size: 11px; color: #888; }
         input { width: 70px; background: #000; color: #fff; border: 1px solid #444; padding: 8px; text-align: center; border-radius: 5px; font-size: 16px; }
@@ -481,6 +495,7 @@
 </body>
 
 </html>
+
 
 
 
