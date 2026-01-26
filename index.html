@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+        :root { 
+            --bg: #0f1215; 
+            --card: #1c1f24; 
+            --accent: #ffd700; 
+            --text: #e0e0e0;
+            /* Цвета редкости */
+            --rarity-orange: #ff9800;
+            --rarity-purple: #9c27b0;
+            --rarity-blue: #2196f3;
+            --rarity-green: #4caf50;
+        }
+        
+        body { font-family: sans-serif; background: var(--bg); color: var(--text); padding: 10px; margin: 0; }
+        
+        .item-row { 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: var(--card); margin-bottom: 8px; padding: 10px; border-radius: 8px; 
+            border: 1px solid #333; 
+        }
+
+        .item-content { display: flex; align-items: center; gap: 12px; }
+
+        /* Базовый стиль иконки с рамкой */
+        .item-icon { 
+            width: 44px; height: 44px; border-radius: 6px; 
+            object-fit: cover; background: #000;
+            border: 2px solid #555; /* Рамка по умолчанию */
+        }
+
+        /* Классы для цветов рамок */
+        .orange { border-color: var(--rarity-orange); box-shadow: 0 0 5px rgba(255, 152, 0, 0.3); }
+        .purple { border-color: var(--rarity-purple); box-shadow: 0 0 5px rgba(156, 39, 176, 0.3); }
+        .blue   { border-color: var(--rarity-blue);   box-shadow: 0 0 5px rgba(33, 150, 243, 0.3); }
+        .green  { border-color: var(--rarity-green);  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
+
+        .name { font-size: 14px; font-weight: bold; }
+        .pts { font-size: 11px; color: #888; }
+        input { width: 70px; background: #000; color: #fff; border: 1px solid #444; padding: 8px; text-align: center; border-radius: 5px; font-size: 16px; }
+        
+        .sticky-result { position: sticky; bottom: 0; background: #1a1a1a; padding: 15px; border-top: 2px solid var(--accent); text-align: center; }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center; color: var(--accent);">Patrigio Calc</h2>
+
+    <div class="item-row">
+        <div class="item-content">
+            <img src="powder.png" class="item-icon orange" alt="icon"> 
+            <div class="info">
+                <div class="name">Powder of Life</div>
+                <div class="pts">1144 pts</div>
+            </div>
+        </div>
+        <input type="number" class="val" data-p="1144" placeholder="0">
+    </div>
+
+    <div class="item-row">
+        <div class="item-content">
+            <img src="glyph_purple.png" class="item-icon purple" alt="icon">
+            <div class="info">
+                <div class="name">Unknown Glyph</div>
+                <div class="pts">52 pts</div>
+            </div>
+        </div>
+        <input type="number" class="val" data-p="52" placeholder="0">
+    </div>
+
+    <div class="item-row">
+        <div class="item-content">
+            <img src="fish_blue.png" class="item-icon blue" alt="icon">
+            <div class="info">
+                <div class="name">Rare Fish</div>
+                <div class="pts">29 / 108</div>
+            </div>
+        </div>
+        <div style="display:flex; gap:5px;">
+            <input type="number" class="val" data-p="29" placeholder="O">
+            <input type="number" class="val" data-p="108" placeholder="R">
+        </div>
+    </div>
+
+    <div class="sticky-result">
+        <div style="font-size: 22px; font-weight: bold; color: var(--accent);">СУММА: <span id="res">0</span></div>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('.val');
+        const resDisplay = document.getElementById('res');
+        function recalc() {
+            let total = 0;
+            inputs.forEach(i => { total += (parseInt(i.value) || 0) * parseInt(i.dataset.p); });
+            resDisplay.innerText = total.toLocaleString();
+        }
+        inputs.forEach(i => i.addEventListener('input', recalc));
+    </script>
+</body>
+</html>
