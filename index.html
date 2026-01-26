@@ -525,21 +525,67 @@
     
     <div class="sticky-result">
         <div style="font-size: 15px; font-weight: bold; color: var(--accent);">СУММА: <span id="res">0</span></div>
+        <button onclick="resetAll()" style="margin-left: 20px; padding: 5px 10px; background: #444; color: #fff; border: 1px solid #777; border-radius: 4px; cursor: pointer; front-size: 12px;">Сбросить</button>
     </div>
 
     <script>
-        const inputs = document.querySelectorAll('.val');
-        const resDisplay = document.getElementById('res');
+        // Функция для пересчета суммы и сохранения данных
         function recalc() {
             let total = 0;
-            inputs.forEach(i => { total += (parseInt(i.value) || 0) * parseInt(i.dataset.p); });
-            resDisplay.innerText = total.toLocaleString();
+            const inputs = document.querySelectorAll('.val');
+            const saveData = {};
+        
+            inputs.forEach((input, index) => {
+                const count = parseFloat(input.value) || 0;
+                const price = parseFloat(input.dataset.p.replace(',', '.'));
+                total += count * price;
+        
+                // Сохраняем значение инпута в объект (по индексу или ID)
+                if (count > 0) {
+                    saveData[index] = count;
+                }
+            });
+        
+            // Записываем данные в память браузера
+            localStorage.setItem('patrigio_data', JSON.stringify(saveData));
+            
+            // Выводим итоговую сумму
+            document.getElementById('total').innerText = Math.floor(total).toLocaleString();
         }
-        inputs.forEach(i => i.addEventListener('input', recalc));
+        
+        // Функция для загрузки данных при открытии страницы
+        function loadData() {
+            const saved = localStorage.getItem('patrigio_data');
+            if (saved) {
+                const data = JSON.parse(saved);
+                const inputs = document.querySelectorAll('.val');
+                
+                Object.keys(data).forEach(index => {
+                    if (inputs[index]) {
+                        inputs[index].value = data[index];
+                    }
+                });
+                recalc(); // Пересчитываем сумму после загрузки
+            }
+        }
+        
+        // Функция сброса всех полей
+        function resetAll() {
+            if (confirm("Очистить все введенные данные?")) {
+                const inputs = document.querySelectorAll('.val');
+                inputs.forEach(input => input.value = "");
+                localStorage.removeItem('patrigio_data');
+                recalc();
+            }
+        }
+        
+        // Запускаем загрузку данных сразу при старте страницы
+        window.onload = loadData;
     </script>
 </body>
 
 </html>
+
 
 
 
