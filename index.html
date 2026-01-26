@@ -16,7 +16,8 @@
             color: var(--text);
             font-family: sans-serif;
             margin: 0;
-            padding: 10px;
+            padding-: 10px;
+            padding-left: 5%;
             display: block;
             flex-direction: column;
             align-items: left;
@@ -82,9 +83,10 @@
         .calc-grid {
             display: grid;
             /* На мобилке 1 колонка, на ПК — сколько влезет (минимум 300px каждая) */
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            justify-content: start;
             gap: 12px;
-            width: 100%;
+            width: 95%;
             max-width: 1000px; /* Чтобы на ультрашироких мониках не растягивалось в бесконечность */
         }
 
@@ -158,6 +160,7 @@
         .purple { border-color: var(--rarity-purple); box-shadow: 0 0 5px rgba(156, 39, 176, 0.3); }
         .blue   { border-color: var(--rarity-blue);   box-shadow: 0 0 5px rgba(33, 150, 243, 0.3); }
         .green  { border-color: var(--rarity-green);  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
+        .white  { border-color: var(--rarity-white);  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
 
         .name { font-size: 14px; font-weight: bold; }
         .pts { font-size: 11px; color: #888; }
@@ -246,215 +249,215 @@
     
     <h2 style="text-align: center; color: var(--accent);">Патрицио</h2>
 
-    <div class="item-row">
+    <div class="item-row orange">
         <div class="item-content">
-            <img src="glifroz.jpg" class="item-icon orange" alt="icon"> 
+            <img src="glifroz.jpg" class="item-icon" alt="icon"> 
             <div class="info">
                 <div class="name">Глиф опознанный, розовый</div>
-                <div class="pts">35000 хрю</div>
+                <div class="pts">35000</div>
             </div>
         </div>
         <input type="number" class="val" data-p="35000" placeholder="0">
     </div>
 
-    <div class="item-row">
+    <div class="item-row orange">
         <div class="item-content">
-            <img src="glifred.jpg" class="item-icon orange" alt="icon">
+            <img src="glifred.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Глиф опознанный, красный</div>
-                <div class="pts">2950 хрю</div>
+                <div class="pts">2950</div>
             </div>
         </div>
         <input type="number" class="val" data-p="2950" placeholder="0">
     </div>
 
-    <div class="item-row">
+    <div class="item-row orange">
         <div class="item-content">
-            <img src="derevo.jpg" class="item-icon orange" alt="icon">
+            <img src="derevo.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Ресурсы (древесина)</div>
-                <div class="pts">1000 хрю</div>
+                <div class="pts">1000</div>
             </div>
         </div>
         <input type="number" class="val" data-p="1000" placeholder="0">
     </div>
-    <div class="item-row">
+    <div class="item-row orange">
         <div class="item-content">
-            <img src="poroshok.jpg" class="item-icon orange" alt="icon">
+            <img src="poroshok.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Ресурсы (порошок)</div>
-                <div class="pts">1000 хрю</div>
+                <div class="pts">1000</div>
             </div>
         </div>
         <input type="number" class="val" data-p="1000" placeholder="0">
     </div>
-    <div class="item-row">
+    <div class="item-row orange">
         <div class="item-content">
-            <img src="ruda.jpg" class="item-icon orange" alt="icon">
+            <img src="ruda.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Ресурсы (руда)</div>
-                <div class="pts">1000 хрю</div>
+                <div class="pts">1000</div>
             </div>
         </div>
         <input type="number" class="val" data-p="1000" placeholder="0">
     </div>
     
-    <div class="item-row">
+    <div class="item-row purple">
         <div class="item-content">
-            <img src="glifrizi.jpg" class="item-icon purple" alt="icon"> 
+            <img src="glifrizi.jpg" class="item-icon" alt="icon"> 
             <div class="info">
                 <div class="name">Глиф опознанный, рыжий</div>
-                <div class="pts">565 хрю</div>
+                <div class="pts">565</div>
             </div>
         </div>
         <input type="number" class="val" data-p="565" placeholder="0">
     </div>
 
-    <div class="item-row">
+    <div class="item-row purple">
         <div class="item-content">
-            <img src="glifelow.jpg" class="item-icon purple" alt="icon">
+            <img src="glifelow.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Глиф опознанный, желтый</div>
-                <div class="pts">340 хрю</div>
+                <div class="pts">340</div>
             </div>
         </div>
         <input type="number" class="val" data-p="340" placeholder="0">
     </div>
   
-    <div class="item-row">
+    <div class="item-row purple">
         <div class="item-content">
-            <img src="ribaf.jpg" class="item-icon purple" alt="icon">
+            <img src="ribaf.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Рыба из рек, фиол грейд</div>
-                <div class="pts">193 хрю</div>
+                <div class="pts">193</div>
             </div>
         </div>
         <input type="number" class="val" data-p="193" placeholder="0">
     </div>
-    <div class="item-row">
+    <div class="item-row purple">
         <div class="item-content">
-            <img src="ribafo.jpg" class="item-icon purple" alt="icon">
+            <img src="ribafo.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, желтый грейд</div>
-                <div class="pts">153 хрю</div>
+                <div class="pts">153</div>
             </div>
         </div>
         <input type="number" class="val" data-p="153" placeholder="0">
     </div>
-    <div class="item-row">
+    <div class="item-row purple">
         <div class="item-content">
-            <img src="glifn.jpg" class="item-icon purple" alt="icon">
+            <img src="glifn.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Глиф неопознанный</div>
-                <div class="pts">148 хрю</div>
+                <div class="pts">148</div>
             </div>
         </div>
         <input type="number" class="val" data-p="148" placeholder="0">
     </div>
-    <div class="item-row">
+    <div class="item-row purple">
         <div class="item-content">
-            <img src="ribas.jpg" class="item-icon purple" alt="icon">
+            <img src="ribas.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Рыба из рек, синий грейд</div>
-                <div class="pts">108 хрю</div>
+                <div class="pts">108</div>
             </div>
         </div>
         <input type="number" class="val" data-p="108" placeholder="0">
     </div>
     
-    <div class="item-row">
+    <div class="item-row blue">
         <div class="item-content">
-            <img src="solne.jpg" class="item-icon blue" alt="icon">
+            <img src="solne.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Солнечный цветок</div>
-                <div class="pts">71 хрю</div>
+                <div class="pts">71</div>
             </div>
         </div>
         <input type="number" class="val" data-p="71" placeholder="0">
     </div>
     
-    <div class="item-row">
+    <div class="item-row blue">
         <div class="item-content">
-            <img src="ribafo1.jpg" class="item-icon blue" alt="icon">
+            <img src="ribafo1.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, фиол грейд</div>
-                <div class="pts">57 хрю</div>
+                <div class="pts">57</div>
             </div>
         </div>
         <input type="number" class="val" data-p="57" placeholder="0">
     </div>
     
-    <div class="item-row">
+    <div class="item-row blue">
         <div class="item-content">
-            <img src="ribaz.jpg" class="item-icon blue" alt="icon">
+            <img src="ribaz.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Рыба из рек, зеленый грейд</div>
-                <div class="pts">50 хрю</div>
+                <div class="pts">50</div>
             </div>
         </div>
         <input type="number" class="val" data-p="50" placeholder="0">
     </div>
     
-    <div class="item-row">
+    <div class="item-row green">
         <div class="item-content">
-            <img src="gliffnoe.jpg" class="item-icon green" alt="icon">
+            <img src="gliffnoe.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Глиф опознанный, фиолет</div>
-                <div class="pts">46 хрю</div>
+                <div class="pts">46</div>
             </div>
         </div>
         <input type="number" class="val" data-p="46" placeholder="0">
     </div>
     
-    <div class="item-row">
+    <div class="item-row green">
         <div class="item-content">
-            <img src="ribab.jpg" class="item-icon green" alt="icon">
+            <img src="ribab.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Рыба из рек, белый грейд</div>
-                <div class="pts">28 хрю</div>
+                <div class="pts">28</div>
             </div>
         </div>
         <input type="number" class="val" data-p="28" placeholder="0">
     </div>
 
-    <div class="item-row">
+    <div class="item-row green">
         <div class="item-content">
-            <img src="ribaso.jpg" class="item-icon green" alt="icon">
+            <img src="ribaso.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, синий грейд</div>
-                <div class="pts">25,5 хрю</div>
+                <div class="pts">25,5</div>
             </div>
         </div>
         <input type="number" class="val" data-p="25.5" placeholder="0">
     </div>
-    <div class="item-row">
+    <div class="item-row green">
         <div class="item-content">
-            <img src="ribazo.jpg" class="item-icon green" alt="icon">
+            <img src="ribazo.jpg" class="item-icon " alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, зеленый грейд</div>
-                <div class="pts">14 хрю</div>
+                <div class="pts">14</div>
             </div>
         </div>
         <input type="number" class="val" data-p="14" placeholder="0">
     </div>
 
-    <div class="item-row">
+    <div class="item-row white">
         <div class="item-content">
-            <img src="kamen.jpg" class="item-icon green" alt="icon">
+            <img src="kamen.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Солнечный камень</div>
-                <div class="pts">9,5 хрю</div>
+                <div class="pts">9,5</div>
             </div>
         </div>
         <input type="number" class="val" data-p="9.5" placeholder="0">
     </div>
     
-    <div class="item-row">
+    <div class="item-row white">
         <div class="item-content">
-            <img src="ribabo.jpg" class="item-icon green" alt="icon">
+            <img src="ribabo.jpg" class="item-icon" alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, белый грейд</div>
-                <div class="pts">8 хрю</div>
+                <div class="pts">8</div>
             </div>
         </div>
         <input type="number" class="val" data-p="8" placeholder="0">
@@ -478,6 +481,7 @@
 </body>
 
 </html>
+
 
 
 
