@@ -33,7 +33,7 @@
         .rewards-wrapper {
             width: 100%;
             max-width: 800px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .rewards-title {
@@ -44,35 +44,38 @@
             padding-left: 8px;
         }
 
-        .rewards-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            background: #1c1f24;
-            padding: 10px;
-            border-radius: 10px;
+       .rewards-grid {
+            display: grid;
+            /* Создаем 7 колонок на ПК, на мобилках они будут переноситься */
+            grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+            background: #333; /* Цвет линий сетки  */
+            gap: 1px; /* Толщина линий сетки */
             border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden; /* Чтобы углы иконок не вылезали за радиус сетки */
         }
 
         .reward-card {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 45px;
+            background: #1c1f24; /* Цвет фона ячейки */
+            padding: 8px 2px;
+            min-height: 60px;
         }
 
         .reward-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 4px;
-            border: 1px solid #444;
-            margin-bottom: 2px;
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            margin-bottom: 4px;
         }
 
         .reward-label {
-            font-size: 8px;
-            color: #888;
+            font-size: 9px;
+            color: var(--accent);
+            text-align: center;
+            font-weight: bold;
         }
 
         /* СЕТКА КАЛЬКУЛЯТОРА */
@@ -475,6 +478,7 @@
 </body>
 
 </html>
+
 
 
 
