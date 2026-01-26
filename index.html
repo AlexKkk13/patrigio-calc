@@ -617,7 +617,31 @@
                             inputs[index].value = data[index];
                         }
                     });
-                            
+                            // АНИМАЦИЯ
+                    // Сначала ПРЯЧЕМ все элементы перед началом
+                    
+                    // Сначала загружаем данные из памяти (стандартно)
+                    const saved = localStorage.getItem('patrigio_save_final');
+                    const inputs = document.querySelectorAll('.val');
+                    if (saved) {
+                        const data = JSON.parse(saved);
+                        Object.keys(data).forEach(index => {
+                            if (inputs[index]) inputs[index].value = data[index];
+                        });
+                    }
+                
+                    // РАБОТА С АНИМАЦИЕЙ
+                    // Находим все карточки наград и выставляем им задержку
+                    const rewards = document.querySelectorAll('.reward-card');
+                    rewards.forEach((card, i) => {
+                        card.style.animationDelay = (i * 0.05) + "s";
+                    });
+                
+                    // Находим все строки предметов и выставляем им задержку (начнут после наград)
+                    const items = document.querySelectorAll('.item-row');
+                    items.forEach((row, i) => {
+                        row.style.animationDelay = (0.3 + (i * 0.05)) + "s";
+                    });      
                                                                             
                     recalc(); // Считаем сумму сразу после загрузки
                 } catch (e) {
@@ -639,14 +663,13 @@
         // Запуск при загрузке страницы
         window.onload = loadSavedData;
         // Автоматическая задержка анимации для всех строк
-        document.querySelectorAll('.item-row').forEach((row, index) => {
-            row.style.animationDelay = (index * 0.05) + 's';
-        });
+        
 
     </script>
 </body>
 
 </html>
+
 
 
 
