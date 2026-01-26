@@ -2,9 +2,9 @@
 <html lang="ru">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">    
     <title>Калькулятор Патрицио</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>    
         :root {
             --bg: #0a0b0d;
@@ -17,19 +17,17 @@
             background-color: var(--bg) !important;
             color: var(--text);
             font-family: sans-serif;
-            margin: 0 auto;
-            padding: 10px;
-            padding-left: 2%;
+            margin: 0;
+            padding: 15px;
             display: flex;
             flex-direction: column;
-            align-items: left;
         }
 
         h2 {
             text-align: center;
-            font-size: clamp(14px, 4vw, 18px);
+            font-size: clamp(16px, 5vw, 22px);
             color: var(--accent);
-            margin-bottom: 15px;
+            margin: 20px 0;
         }
 
         /* КОНТЕЙНЕР НАГРАД (13 иконок) */
@@ -50,41 +48,29 @@
        .rewards-grid {
             display: flex;
             flex-wrap: wrap;
+            gap: 8px;
             justify-content: center;
-            /* Создаем 7 колонок на ПК, на мобилках они будут переноситься */
-            grid-template-columns: repeat(auto-fill, 65px);
-            background: transparent; /* Цвет линий сетки  */
-            gap: 8px; /* Толщина линий сетки */
-            border: 1px solid #333;
-            border-radius: 4px;
-            width: fit-content;
-            overflow: hidden; /* Чтобы углы иконок не вылезали за радиус сетки */
+            margin-bottom: 30px;
         }
 
         .reward-card {
             display: flex;
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.1) 
-            transition: all 0.3s ease;
-            width: 70px;
-            height: 80px;
             flex-direction: column;
             align-items: center;
-            background: #0d0f12; /* Цвет фона ячейки */
             justify-content: center;
-            box-sizing: border-box;            
-            animation: fadeInUp 5s ease forwards;   
-            opacity: 0;
+            background: #0d0f12;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 6px;
+            width: 65px;
+            height: 75px;
+            opacity: 0; /* Для анимации */
+            animation: fadeInUp 1s ease forwards;
                  
         }
         
-        .reward-icon {
-            width: 42px;
-            height: 42px;
-            object-fit: contain;
-            margin-bottom: 6px;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.1))
-        }
+        .reward-icon { width: 35px; height: 35px; object-fit: contain; }
+        .reward-name { font-size: 10px; color: var(--accent); margin-top: 5px; font-weight: bold; }
+        
 
         .reward-label {
             font-size: 9px;
@@ -96,14 +82,9 @@
         /* СЕТКА КАЛЬКУЛЯТОРА */
         .calc-grid {
             display: grid;
-            /* На мобилке 1 колонка, на ПК — сколько влезет (минимум 300px каждая) */
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            justify-content: start;
-            gap: 12px 15px;
-            width: 95%;
-            padding: 10px;
-            max-width: 1200px; /* Чтобы на ультрашироких мониках не растягивалось в бесконечность */
-            margin: 0 auto; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+            padding-bottom: 100px;
         }
         /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
         @keyframes fadeInUp {
@@ -121,17 +102,11 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #121417;
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            box-sizing: border-box;
-            margin-bottom: 0;
-            box-sizing: border-box;
-            width: 100%;
-            /* Применяем анимацию */            
-            animation: fadeInUp 0.5s ease forwards;
-            opacity: 0;           
+            background: var(--card-bg);
+            padding: 12px;
+            border-radius: 10px;
+            opacity: 0; /* Для анимации */
+            animation: fadeInUp 1s ease forwards;          
                              }
         .item-row:last-child {
             margin-bottom: 0;
@@ -564,115 +539,63 @@
         const tg = window.Telegram.WebApp;
         tg.ready();
         tg.expand();
-        tg.setHeaderColor('#0a0b0d');
-        tg.setBackgroundColor('#0a0b0d')
-        // 1. Главная функция подсчета
+
         function recalc() {
             let total = 0;
             const inputs = document.querySelectorAll('.val');
             const saveData = {};
-        
+
             inputs.forEach((input, index) => {
-                // Получаем количество (число)
                 let count = parseFloat(input.value) || 0;
-                
-                // Получаем цену из data-p (заменяем запятую на точку, если она есть)
-                let priceStr = input.getAttribute('data-p') || "0";
-                let price = parseFloat(priceStr.replace(',', '.')) || 0;
-        
+                let price = parseFloat(input.getAttribute('data-p')) || 0;
                 total += count * price;
-        
-                // Готовим данные для сохранения (только те, что больше 0)
-                if (count > 0) {
-                    saveData[index] = count;
-                }
+                if (count > 0) saveData[index] = count;
             });
-        
-            // Выводим сумму на экран
+
             const totalElement = document.getElementById('total');
             if (totalElement) {
                 totalElement.innerText = Math.floor(total).toLocaleString();
-                
-                // Красим в зеленый, если набрали 900к
-                if (total >= 900000) {
-                    totalElement.style.color = "#4caf50";
-                } else {
-                    totalElement.style.color = "#ffd700";
-                }
+                totalElement.style.color = total >= 900000 ? "#4caf50" : "#ffd700";
             }
-        
-            // Сохраняем в память браузера
             localStorage.setItem('patrigio_storage', JSON.stringify(saveData));
         }
-        
-        // 2. Загрузка данных при входе на сайт
+
         function loadSavedData() {
             const saved = localStorage.getItem('patrigio_storage');
+            const inputs = document.querySelectorAll('.val');
+            
             if (saved) {
-                try {
-                    const data = JSON.parse(saved);
-                    const inputs = document.querySelectorAll('.val');
-                    
-                    Object.keys(data).forEach(index => {
-                        if (inputs[index]) {
-                            inputs[index].value = data[index];
-                        }
-                    });
-                            // АНИМАЦИЯ
-                    // Сначала ПРЯЧЕМ все элементы перед началом
-                    
-                    // Сначала загружаем данные из памяти (стандартно)
-                    const saved = localStorage.getItem('patrigio_save_final');
-                    const inputs = document.querySelectorAll('.val');
-                    if (saved) {
-                        const data = JSON.parse(saved);
-                        Object.keys(data).forEach(index => {
-                            if (inputs[index]) inputs[index].value = data[index];
-                        });
-                    }
-                
-                    // РАБОТА С АНИМАЦИЕЙ
-                    // Находим все карточки наград и выставляем им задержку
-                    const rewards = document.querySelectorAll('.reward-card');
-                    rewards.forEach((card, i) => {
-                        card.style.animationDelay = (i * 0.05) + "s";
-                    });
-                
-                    // Находим все строки предметов и выставляем им задержку (начнут после наград)
-                    const items = document.querySelectorAll('.item-row');
-                    items.forEach((row, i) => {
-                        row.style.animationDelay = (0.3 + (i * 0.05)) + "s";
-                    });      
-                                                                            
-                    recalc(); // Считаем сумму сразу после загрузки
-                } catch (e) {
-                    console.error("Ошибка загрузки данных", e);
-                }
+                const data = JSON.parse(saved);
+                Object.keys(data).forEach(index => {
+                    if (inputs[index]) inputs[index].value = data[index];
+                });
             }
+
+            // Плавная очередность анимации
+            document.querySelectorAll('.reward-card').forEach((card, i) => {
+                card.style.animationDelay = (i * 0.1) + "s";
+            });
+            document.querySelectorAll('.item-row').forEach((row, i) => {
+                row.style.animationDelay = (0.5 + (i * 0.1)) + "s";
+            });
+
+            recalc();
         }
-        
-        // 3. Функция сброса
+
         function resetAll() {
-            if (confirm("Очистить все введенные данные?")) {
-                const inputs = document.querySelectorAll('.val');
-                inputs.forEach(input => input.value = "");
+            if (confirm("Очистить данные?")) {
+                document.querySelectorAll('.val').forEach(input => input.value = "");
                 localStorage.removeItem('patrigio_storage');
                 recalc();
             }
         }
-        
-        // Запуск при загрузке страницы
-        window.onload = loadSavedData;
-        // Автоматическая задержка анимации для всех строк        
-        document.querySelectorAll('.item-row').forEach((row, index) => {
-            row.style.animationDelay = (index * 0.05) + 's';
-        });
-                
 
+        window.onload = loadSavedData;
     </script>
 </body>
 
 </html>
+
 
 
 
