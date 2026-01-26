@@ -54,19 +54,18 @@
             border: 1px solid #333;
             border-radius: 4px;
             width: fit-content;
-            max-width: 100%;
             overflow: hidden; /* Чтобы углы иконок не вылезали за радиус сетки */
         }
 
         .reward-card {
             display: flex;
-            width: 65px;
+            width: 70px;
             height: 80px;
             flex-direction: column;
             align-items: center;
             background: #1c1f24; /* Цвет фона ячейки */
-            padding: 5px 0px;
-            min-height: 60px;
+            justify-content: center;
+            box-sizing: border-box
         }
 
         .reward-icon {
@@ -168,6 +167,14 @@
         }
     
         /* Классы для цветов рамок */
+        /* Зеленый неон (Green Neon) */
+        .green { 
+            border: 2px solid #4caf50 !important; 
+            box-shadow: 0 0 12px rgba(76, 175, 80, 0.5), inset 0 0 6px rgba(76, 175, 80, 0.3) !important; 
+        }
+        .green .item-icon { 
+            border-color: #4caf50 !important; 
+        }
         /* Белый (Neon White) */
         .white { 
             border: 2px solid #ffffff !important; 
@@ -529,6 +536,7 @@
 </body>
 
 </html>
+
 
 
 
