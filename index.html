@@ -631,14 +631,14 @@
                     rewards.forEach((card, i) => {
                         setTimeout(() => {
                             card.classList.add('animate-in');
-                        }, i * 10); // Задержка 0.05с между иконками
+                        }, i * 100); // Задержка 0.05с между иконками
                     });
                 
                     // Запускаем анимацию для ПРЕДМЕТОВ (с паузой после наград)
                     items.forEach((row, i) => {
                         setTimeout(() => {
                             row.classList.add('animate-in');
-                        }, 300 + (i * 10)); 
+                        }, 300 + (i * 50)); 
                     });
                         
                     recalc(); // Считаем сумму сразу после загрузки
@@ -669,6 +669,7 @@
 </body>
 
 </html>
+
 
 
 
