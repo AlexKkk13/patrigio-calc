@@ -622,26 +622,30 @@
                     });
                     // АНИМАЦИЯ
                     // Сначала ПРЯЧЕМ все элементы перед началом
-                    const rewards = document.querySelectorAll('.reward-card');
-                    const items = document.querySelectorAll('.item-row');
                     
-                    rewards.forEach(el => el.style.opacity = "0");
-                    items.forEach(el => el.style.opacity = "0");
+                    // Сначала загружаем данные из памяти (стандартно)
+                    const saved = localStorage.getItem('patrigio_save_final');
+                    const inputs = document.querySelectorAll('.val');
+                    if (saved) {
+                        const data = JSON.parse(saved);
+                        Object.keys(data).forEach(index => {
+                            if (inputs[index]) inputs[index].value = data[index];
+                        });
+                    }
                 
-                    // Запускаем анимацию для НАГРАД
+                    // РАБОТА С АНИМАЦИЕЙ
+                    // Находим все карточки наград и выставляем им задержку
+                    const rewards = document.querySelectorAll('.reward-card');
                     rewards.forEach((card, i) => {
-                        setTimeout(() => {
-                            card.classList.add('animate-in');
-                        }, i * 10); // Задержка 0.05с между иконками
+                        card.style.animationDelay = (i * 0.05) + "s";
                     });
                 
-                    // Запускаем анимацию для ПРЕДМЕТОВ (с паузой после наград)
+                    // Находим все строки предметов и выставляем им задержку (начнут после наград)
+                    const items = document.querySelectorAll('.item-row');
                     items.forEach((row, i) => {
-                        setTimeout(() => {
-                            row.classList.add('animate-in');
-                        }, 300 + (i * 10)); 
-                    });
-                                                            
+                        row.style.animationDelay = (0.3 + (i * 0.05)) + "s";
+                    });                
+                                                                            
                     recalc(); // Считаем сумму сразу после загрузки
                 } catch (e) {
                     console.error("Ошибка загрузки данных", e);
@@ -670,6 +674,7 @@
 </body>
 
 </html>
+
 
 
 
