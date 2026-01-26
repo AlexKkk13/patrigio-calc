@@ -51,7 +51,7 @@
             justify-content: center;
             /* Создаем 7 колонок на ПК, на мобилках они будут переноситься */
             grid-template-columns: repeat(auto-fill, 65px);
-            background: #333; /* Цвет линий сетки  */
+            background: transparent; /* Цвет линий сетки  */
             gap: 1px; /* Толщина линий сетки */
             border: 1px solid #333;
             border-radius: 4px;
@@ -61,6 +61,7 @@
 
         .reward-card {
             display: flex;
+            border: 1px solid #333;
             width: 70px;
             height: 80px;
             flex-direction: column;
@@ -101,10 +102,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--card-bg);
-            padding: 10px;
+            background: #2a2e35;
+            padding: 10px 15px;
             border-radius: 8px;
-            border: 1px solid #444;
+            border: 2px solid transparent;
             box-sizing: border-box;
             margin-bottom: 0;
             box-sizing: border-box;
@@ -538,6 +539,7 @@
 </body>
 
 </html>
+
 
 
 
