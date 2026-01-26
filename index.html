@@ -630,6 +630,7 @@
                     // Запускаем анимацию для НАГРАД
                     rewards.forEach((card, i) => {
                         setTimeout(() => {
+                            card.style.opacity = '1'
                             card.classList.add('animate-in');
                         }, i * 250); // Задержка 0.05с между иконками
                     });
@@ -637,6 +638,7 @@
                     // Запускаем анимацию для ПРЕДМЕТОВ (с паузой после наград)
                     items.forEach((row, i) => {
                         setTimeout(() => {
+                            row.style.opacity = '1'
                             row.classList.add('animate-in');
                         }, 300 + (i * 200)); 
                     });
@@ -669,6 +671,7 @@
 </body>
 
 </html>
+
 
 
 
