@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
+    <title>Калькулятор Патрицио</title>
         :root {
             --bg: #0a0b0d;
             --card-bg: #121417;
@@ -72,7 +73,7 @@
             justify-content: center;
             box-sizing: border-box;
             opacity: 0;
-            animation: fadeInUp 0.3s ease-out forwards;
+            animation: fadeInUp 1s ease-out forwards;
                       
         }
 
@@ -107,7 +108,7 @@
         @keyframes fadeInUp {
             0% {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(38px);
             }
             100% {
                 opacity: 1;
@@ -129,7 +130,7 @@
             width: 100%;
             /* Применяем анимацию */
             opacity: 0;
-            animation: fadeInUp 0.5s ease-out forwards;
+            animation: fadeInUp 1s ease-out forwards;
              
           
                     }
@@ -338,7 +339,7 @@
         </div>
      </div>
     
-    <h2 style="text-align: center; color: var(--accent);">Патрицио</h2>
+    <h2 style="text-align: center; color: var(--accent);">Калькулятор 🧮</h2>
 <div class="calc-grid"> 
     <div class="item-row orange">
         <div class="item-content">
@@ -561,6 +562,11 @@
     </div>
 
     <script>
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+        tg.setHeaderColor('#0a0b0d');
+        tg.setBackgroundColor('#0a0b0d')
         // 1. Главная функция подсчета
         function recalc() {
             let total = 0;
@@ -625,14 +631,14 @@
                     rewards.forEach((card, i) => {
                         setTimeout(() => {
                             card.classList.add('animate-in');
-                        }, i * 50); // Задержка 0.05с между иконками
+                        }, i * 90); // Задержка 0.05с между иконками
                     });
                 
                     // Запускаем анимацию для ПРЕДМЕТОВ (с паузой после наград)
                     items.forEach((row, i) => {
                         setTimeout(() => {
                             row.classList.add('animate-in');
-                        }, 300 + (i * 50)); 
+                        }, 300 + (i * 90)); 
                     });
                         
                     recalc(); // Считаем сумму сразу после загрузки
@@ -663,6 +669,7 @@
 </body>
 
 </html>
+
 
 
 
