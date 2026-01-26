@@ -71,7 +71,8 @@
             background: #0d0f12; /* Цвет фона ячейки */
             justify-content: center;
             box-sizing: border-box;
-            animation: cardEntrance 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
                       
         }
 
@@ -104,15 +105,13 @@
         }
         /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
         @keyframes fadeInUp {
-            from {
+            0% {
                 opacity: 0;
-                transform: scale(0.95) translateY(10px);
-                filter: bringhtness(0.5);
+                transform: translateY(20px);
             }
-            to {
+            100% {
                 opacity: 1;
-                transform: scale(1) translateY(0);
-                filter: bringhtness(1);
+                transform: translateY(0);
             }
         }
 
@@ -129,7 +128,8 @@
             box-sizing: border-box;
             width: 100%;
             /* Применяем анимацию */
-            animation: cardEntrance 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
              
           
                     }
@@ -663,6 +663,7 @@
 </body>
 
 </html>
+
 
 
 
