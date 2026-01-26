@@ -4,6 +4,41 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
+        .rewards-grid {
+            display: flex;
+            flex-wrap: wrap; /* Позволяет переносить иконки на новые строки */
+            justify-content: center;
+            gap: 10px; /* Расстояние между карточками */
+            background: #1c1f24;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+        
+        .reward-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 45px; /* Ширина одной ячейки награды */
+        }
+        
+        .reward-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            border-radius: 4px;
+            border: 1px solid #444;
+            margin-bottom: 4px;
+        }
+        
+        .reward-name {
+            font-size: 9px; /* Маленький шрифт, чтобы влезало */
+            color: #aaa;
+            text-align: center;
+            line-height: 1;
+            word-wrap: break-word; /* Перенос слов, если название длинное */
+        }
         :root { 
             --bg: #0f1215; 
             --card: #1c1f24; 
@@ -105,7 +140,7 @@
     
     <div class="item-row">
         <div class="item-content">
-            <img src="glifrizi.jpg" class="item-icon orange" alt="icon"> 
+            <img src="glifrizi.jpg" class="item-icon purple" alt="icon"> 
             <div class="info">
                 <div class="name">Глиф опознанный, рыжий</div>
                 <div class="pts">565 хрю</div>
@@ -116,7 +151,7 @@
 
     <div class="item-row">
         <div class="item-content">
-            <img src="glifelow.jpg" class="item-icon orange" alt="icon">
+            <img src="glifelow.jpg" class="item-icon purple" alt="icon">
             <div class="info">
                 <div class="name">Глиф опознанный, желтый</div>
                 <div class="pts">340 хрю</div>
@@ -127,7 +162,7 @@
   
     <div class="item-row">
         <div class="item-content">
-            <img src="ribaf.jpg" class="item-icon orange" alt="icon">
+            <img src="ribaf.jpg" class="item-icon purple" alt="icon">
             <div class="info">
                 <div class="name">Рыба из рек, фиол грейд</div>
                 <div class="pts">193 хрю</div>
@@ -137,7 +172,7 @@
     </div>
     <div class="item-row">
         <div class="item-content">
-            <img src="ribafo.jpg" class="item-icon orange" alt="icon">
+            <img src="ribafo.jpg" class="item-icon purple" alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, желтый грейд</div>
                 <div class="pts">153 хрю</div>
@@ -147,7 +182,7 @@
     </div>
     <div class="item-row">
         <div class="item-content">
-            <img src="glifn.jpg" class="item-icon orange" alt="icon">
+            <img src="glifn.jpg" class="item-icon purple" alt="icon">
             <div class="info">
                 <div class="name">Глиф неопознанный</div>
                 <div class="pts">148 хрю</div>
@@ -157,7 +192,7 @@
     </div>
     <div class="item-row">
         <div class="item-content">
-            <img src="ribas.jpg" class="item-icon orange" alt="icon">
+            <img src="ribas.jpg" class="item-icon purple" alt="icon">
             <div class="info">
                 <div class="name">Рыба из рек, синий грейд</div>
                 <div class="pts">108 хрю</div>
@@ -168,7 +203,7 @@
     
     <div class="item-row">
         <div class="item-content">
-            <img src="solne.jpg" class="item-icon orange" alt="icon">
+            <img src="solne.jpg" class="item-icon blue" alt="icon">
             <div class="info">
                 <div class="name">Солнечный цветок</div>
                 <div class="pts">71 хрю</div>
@@ -179,7 +214,7 @@
     
     <div class="item-row">
         <div class="item-content">
-            <img src="ribafo1.jpg" class="item-icon orange" alt="icon">
+            <img src="ribafo1.jpg" class="item-icon blue" alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, фиол грейд</div>
                 <div class="pts">57 хрю</div>
@@ -190,7 +225,7 @@
     
     <div class="item-row">
         <div class="item-content">
-            <img src="ribaz.jpg" class="item-icon orange" alt="icon">
+            <img src="ribaz.jpg" class="item-icon blue" alt="icon">
             <div class="info">
                 <div class="name">Рыба из рек, зеленый грейд</div>
                 <div class="pts">50 хрю</div>
@@ -201,7 +236,7 @@
     
     <div class="item-row">
         <div class="item-content">
-            <img src="gliffnoe.jpg" class="item-icon orange" alt="icon">
+            <img src="gliffnoe.jpg" class="item-icon green" alt="icon">
             <div class="info">
                 <div class="name">Глиф опознанный, фиолет</div>
                 <div class="pts">46 хрю</div>
@@ -212,7 +247,7 @@
     
     <div class="item-row">
         <div class="item-content">
-            <img src="ribab.jpg" class="item-icon orange" alt="icon">
+            <img src="ribab.jpg" class="item-icon green" alt="icon">
             <div class="info">
                 <div class="name">Рыба из рек, белый грейд</div>
                 <div class="pts">28 хрю</div>
@@ -223,17 +258,17 @@
 
     <div class="item-row">
         <div class="item-content">
-            <img src="ribaso.jpg" class="item-icon orange" alt="icon">
+            <img src="ribaso.jpg" class="item-icon green" alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, синий грейд</div>
                 <div class="pts">25,5 хрю</div>
             </div>
         </div>
-        <input type="number" class="val" data-p="25,5" placeholder="0">
+        <input type="number" class="val" data-p="25.5" placeholder="0">
     </div>
     <div class="item-row">
         <div class="item-content">
-            <img src="ribazo.jpg" class="item-icon orange" alt="icon">
+            <img src="ribazo.jpg" class="item-icon green" alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, зеленый грейд</div>
                 <div class="pts">14 хрю</div>
@@ -244,18 +279,18 @@
 
     <div class="item-row">
         <div class="item-content">
-            <img src="kamen.jpg" class="item-icon orange" alt="icon">
+            <img src="kamen.jpg" class="item-icon green" alt="icon">
             <div class="info">
                 <div class="name">Солнечный камень</div>
                 <div class="pts">9,5 хрю</div>
             </div>
         </div>
-        <input type="number" class="val" data-p="9,5" placeholder="0">
+        <input type="number" class="val" data-p="9.5" placeholder="0">
     </div>
     
     <div class="item-row">
         <div class="item-content">
-            <img src="ribabo.jpg" class="item-icon orange" alt="icon">
+            <img src="ribabo.jpg" class="item-icon green" alt="icon">
             <div class="info">
                 <div class="name">Рыба из океана, белый грейд</div>
                 <div class="pts">8 хрю</div>
@@ -282,6 +317,7 @@
 </body>
 
 </html>
+
 
 
 
