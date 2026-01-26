@@ -4,70 +4,152 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
+        :root {
+            --bg: #1a1d21;
+            --card-bg: #2a2e35;
+            --accent: #ffd700;
+            --text: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: sans-serif;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: clamp(14px, 4vw, 18px);
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        /* КОНТЕЙНЕР НАГРАД (13 иконок) */
+        .rewards-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        .rewards-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            border-left: 3px solid var(--accent);
+            padding-left: 8px;
+        }
+
         .rewards-grid {
             display: flex;
-            flex-wrap: wrap; /* Позволяет переносить иконки на новые строки */
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 10px; /* Расстояние между карточками */
+            gap: 8px;
             background: #1c1f24;
-            padding: 12px;
-            border-radius: 12px;
-            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 10px;
             border: 1px solid #333;
         }
-        
+
         .reward-card {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 45px; /* Ширина одной ячейки награды */
+            width: 45px;
         }
-        
+
         .reward-icon {
-            width: 36px;
-            height: 36px;
-            object-fit: contain;
+            width: 34px;
+            height: 34px;
             border-radius: 4px;
             border: 1px solid #444;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
-        
-        .reward-name {
-            font-size: 9px; /* Маленький шрифт, чтобы влезало */
+
+        .reward-label {
+            font-size: 8px;
+            color: #888;
+        }
+
+        /* СЕТКА КАЛЬКУЛЯТОРА */
+        .calc-grid {
+            display: grid;
+            /* На мобилке 1 колонка, на ПК — сколько влезет (минимум 300px каждая) */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 12px;
+            width: 100%;
+            max-width: 1000px; /* Чтобы на ультрашироких мониках не растягивалось в бесконечность */
+        }
+
+        .item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-bg);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            box-sizing: border-box;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .item-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            border: 1px solid #555;
+        }
+
+        .name-box .name {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .name-box .price {
+            font-size: 11px;
             color: #aaa;
+        }
+
+        .val {
+            width: 65px;
+            background: #000;
+            color: var(--accent);
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 6px;
             text-align: center;
-            line-height: 1;
-            word-wrap: break-word; /* Перенос слов, если название длинное */
-        }
-        :root { 
-            --bg: #0f1215; 
-            --card: #1c1f24; 
-            --accent: #ffd700; 
-            --text: #e0e0e0;
-            /* Цвета редкости */
-            --rarity-orange: #ff9800;
-            --rarity-purple: #9c27b0;
-            --rarity-blue: #2196f3;
-            --rarity-green: #4caf50;
-        }
-        
-        body { font-family: sans-serif; background: var(--bg); color: var(--text); padding: 10px; margin: 0; }
-        
-        .item-row { 
-            display: flex; justify-content: space-between; align-items: center; 
-            background: var(--card); margin-bottom: 8px; padding: 10px; border-radius: 8px; 
-            border: 1px solid #333; 
+            font-weight: bold;
+            outline: none;
         }
 
-        .item-content { display: flex; align-items: center; gap: 12px; }
-
-        /* Базовый стиль иконки с рамкой */
-        .item-icon { 
-            width: 44px; height: 44px; border-radius: 6px; 
-            object-fit: cover; background: #000;
-            border: 2px solid #555; /* Рамка по умолчанию */
+        .val:focus {
+            border-color: var(--accent);
         }
 
+        /* ПЛАВАЮЩИЙ ИТОГ */
+        .total-panel {
+            position: fixed;
+            bottom: 20px;
+            background: var(--accent);
+            color: #000;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            font-size: 18px;
+            z-index: 1000;
+        }
+    
         /* Классы для цветов рамок */
         .orange { border-color: var(--rarity-orange); box-shadow: 0 0 5px rgba(255, 152, 0, 0.3); }
         .purple { border-color: var(--rarity-purple); box-shadow: 0 0 5px rgba(156, 39, 176, 0.3); }
@@ -82,78 +164,82 @@
     </style>
 </head>
 <body>
-    <h2 style="text-align: center; color: var(--accent);">Максимальная еженедельная награда за 900к очков</h2>
-    <div class="rewards-grid">
-        
-    <div class="reward-card">
-        <img src="r1.jpg" class="reward-icon">
-        <div class="reward-name">10</div>
-    </div>
-
-    <div class="reward-card">
-        <img src="r2.jpg" class="reward-icon">
-        <div class="reward-name">300</div>
-    </div>
-
-    <div class="reward-card">
-        <img src="r3.jpg" class="reward-icon">
-        <div class="reward-name">10</div>
-    </div>
-   
-    <div class="reward-card">
-        <img src="r4.jpg" class="reward-icon">
-        <div class="reward-name">10</div>
-    </div>
-
-    <div class="reward-card">
-        <img src="r5.jpg" class="reward-icon">
-        <div class="reward-name">80</div>
-    </div>
-
-    <div class="reward-card">
-        <img src="r6.jpg" class="reward-icon">
-        <div class="reward-name">50</div>
-    </div>
+    <h2>Максимальная еженедельная награда за 900к очков</h2>
     
-    <div class="reward-card">
-        <img src="r7.jpg" class="reward-icon">
-        <div class="reward-name">10</div>
-    </div>
-
-    <div class="reward-card">
-        <img src="r8.jpg" class="reward-icon">
-        <div class="reward-name">10</div>
-    </div>
+    <div class="rewards-wrapper"> 
+        <div class="rewards-title">Награды</div>
+        <div class="rewards-grid">
+            <div class="reward-card">
+                <img src="r1.jpg" class="reward-icon">
+                <div class="reward-name">10</div>
+            </div>
         
-    <div class="reward-card">
-        <img src="r9.jpg" class="reward-icon">
-        <div class="reward-name">1000</div>
-    </div>
-
-    <div class="reward-card">
-        <img src="r10.jpg" class="reward-icon">
-        <div class="reward-name">1000</div>
-    </div>
-
-    <div class="reward-card">
-        <img src="r11.jpg" class="reward-icon">
-        <div class="reward-name">800</div>
-    </div>
-
-    <div class="reward-card">
-        <img src="r12.jpg" class="reward-icon">
-        <div class="reward-name">12300</div>
-    </div>
+            <div class="reward-card">
+                <img src="r2.jpg" class="reward-icon">
+                <div class="reward-name">300</div>
+            </div>
         
-    <div class="reward-card">
-        <img src="r13.jpg" class="reward-icon">
-        <div class="reward-name">21600</div>
-    </div>
-
-    <div class="reward-card">
-        <img src="r14.jpg" class="reward-icon">
-        <div class="reward-name">21800</div>
-    </div>
+            <div class="reward-card">
+                <img src="r3.jpg" class="reward-icon">
+                <div class="reward-name">10</div>
+            </div>
+           
+            <div class="reward-card">
+                <img src="r4.jpg" class="reward-icon">
+                <div class="reward-name">10</div>
+            </div>
+        
+            <div class="reward-card">
+                <img src="r5.jpg" class="reward-icon">
+                <div class="reward-name">80</div>
+            </div>
+        
+            <div class="reward-card">
+                <img src="r6.jpg" class="reward-icon">
+                <div class="reward-name">50</div>
+            </div>
+            
+            <div class="reward-card">
+                <img src="r7.jpg" class="reward-icon">
+                <div class="reward-name">10</div>
+            </div>
+        
+            <div class="reward-card">
+                <img src="r8.jpg" class="reward-icon">
+                <div class="reward-name">10</div>
+            </div>
+                
+            <div class="reward-card">
+                <img src="r9.jpg" class="reward-icon">
+                <div class="reward-name">1000</div>
+            </div>
+        
+            <div class="reward-card">
+                <img src="r10.jpg" class="reward-icon">
+                <div class="reward-name">1000</div>
+            </div>
+        
+            <div class="reward-card">
+                <img src="r11.jpg" class="reward-icon">
+                <div class="reward-name">800</div>
+            </div>
+        
+            <div class="reward-card">
+                <img src="r12.jpg" class="reward-icon">
+                <div class="reward-name">12300</div>
+            </div>
+                
+            <div class="reward-card">
+                <img src="r13.jpg" class="reward-icon">
+                <div class="reward-name">21600</div>
+            </div>
+        
+            <div class="reward-card">
+                <img src="r14.jpg" class="reward-icon">
+                <div class="reward-name">21800</div>
+            </div>
+        </div>
+     </div>
     
     <h2 style="text-align: center; color: var(--accent);">Патрицио</h2>
 
@@ -389,6 +475,7 @@
 </body>
 
 </html>
+
 
 
 
