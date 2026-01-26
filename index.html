@@ -97,6 +97,17 @@
             max-width: 1200px; /* Чтобы на ультрашироких мониках не растягивалось в бесконечность */
             margin: 0 auto; 
         }
+        /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
         .item-row {
             display: flex;
@@ -110,6 +121,9 @@
             margin-bottom: 0;
             box-sizing: border-box;
             width: 100%;
+            /* Применяем анимацию */
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
                     }
         .item-row:last-child {
             margin-bottom: 0;
@@ -225,7 +239,7 @@
         .pts { font-size: 11px; color: #888; }
         input { width: 70px; background: #000; color: #fff; border: 1px solid #444; padding: 8px; text-align: center; border-radius: 5px; font-size: 16px; }
         
-        .sticky-result { position: sticky; bottom: 0; background: rgba(8, 8, 8, 0.75); padding: 12px 20px; border-top: 1px solid #333; text-align: center; justify-filter: blur(15px); box-sizing: border-box; gap: 20px; }
+        .sticky-result { position: sticky; bottom: 0; background: rgba(8, 8, 8, 0.75); padding: 12px 20px; border-top: 1px solid #333; text-align: center; justify-filter: blur(12px); box-sizing: border-box; gap: 20px; }
         #total {
             front-size: 20px; color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.1)
         }
@@ -610,11 +624,16 @@
         
         // Запуск при загрузке страницы
         window.onload = loadSavedData;
+        // Автоматическая задержка анимации для всех строк
+        document.querySelectorAll('.item-row').forEach((row, index) => {
+            row.style.animationDelay = (index * 0.05) + 's';
+        });
 
     </script>
 </body>
 
 </html>
+
 
 
 
