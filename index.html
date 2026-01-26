@@ -552,6 +552,12 @@
             // Выводим итоговую сумму
             document.getElementById('total').innerText = Math.floor(total).toLocaleString();
         }
+            const totalSpan = document.getElementByld('total');
+            if (total>900000){
+                totalSpan.style.color = "#4caf50";
+            }else{
+                totalSpan.style.color = "#ffd700";
+            }
         
         // Функция для загрузки данных при открытии страницы
         function loadData() {
@@ -585,6 +591,7 @@
 </body>
 
 </html>
+
 
 
 
