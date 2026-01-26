@@ -72,7 +72,7 @@
             justify-content: center;
             box-sizing: border-box;
             animation: cardEntrance 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            opacity: 1;           
+                      
         }
 
         .reward-icon {
@@ -105,7 +105,7 @@
         /* АНИМАЦИЯ ПОЯВЛЕНИЯ */
         @keyframes fadeInUp {
             from {
-                opacity: 0.4;
+                opacity: 0;
                 transform: scale(0.95) translateY(10px);
                 filter: bringhtness(0.5);
             }
@@ -130,7 +130,7 @@
             width: 100%;
             /* Применяем анимацию */
             animation: cardEntrance 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            opacity: 1;  
+             
           
                     }
         .item-row:last-child {
@@ -614,10 +614,26 @@
                         }
                     });
                     // АНИМАЦИЯ
-                    document.querySelectorAll('.reward-card').forEach((card, i) =>{
-                        card.style.animationDelay=(i * 0.05) + 's';                    
-                    document.querySelectorAll('.item-row').forEach((row, i) =>{
-                        card.style.animationDelay=(0.2 + (i * 0.05)) + 's';});
+                    // Сначала ПРЯЧЕМ все элементы перед началом
+                    const rewards = document.querySelectorAll('.reward-card');
+                    const items = document.querySelectorAll('.item-row');
+                    
+                    rewards.forEach(el => el.style.opacity = "0");
+                    items.forEach(el => el.style.opacity = "0");
+                
+                    // Запускаем анимацию для НАГРАД
+                    rewards.forEach((card, i) => {
+                        setTimeout(() => {
+                            card.classList.add('animate-in');
+                        }, i * 50); // Задержка 0.05с между иконками
+                    });
+                
+                    // Запускаем анимацию для ПРЕДМЕТОВ (с паузой после наград)
+                    items.forEach((row, i) => {
+                        setTimeout(() => {
+                            row.classList.add('animate-in');
+                        }, 300 + (i * 50)); 
+                    });
                         
                     recalc(); // Считаем сумму сразу после загрузки
                 } catch (e) {
@@ -647,6 +663,7 @@
 </body>
 
 </html>
+
 
 
 
