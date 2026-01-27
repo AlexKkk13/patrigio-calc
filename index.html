@@ -19,42 +19,39 @@
             align-items: center;
             cursor: zoom-out;
             overflow: auto;
-            touch-action: pinch-zoom;
+            /* Убираем любые ограничения для жестов */
+            touch-action: auto; 
         }
         
         #image-modal.active {
             display: flex;
         }
         
-        /* СТИЛЬ ДЛЯ ТЕЛЕФОНА (по умолчанию) */
         #full-image {
+            /* Базовые настройки для мобилок (зум будет работать!) */
             width: auto !important;
             height: auto !important;
             max-width: 95vw;
             max-height: 95vh;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255,255,255,0.2);
-            /* На телефоне оставляем анимацию, если хочешь */
-            transform: scale(0.9);
-            transition: transform 0.2s ease-out;
+            /* Анимация только через прозрачность, чтобы не ломать зум */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            /* Убираем transform вообще! */
         }
         
         #image-modal.active #full-image {
-            transform: scale(1);
+            opacity: 1;
         }
         
         /* СТИЛЬ ДЛЯ КОМПЬЮТЕРА (экраны больше 768px) */
         @media (min-width: 768px) {
             #image-modal #full-image {
-                /* Убираем все трансформации, которые ломают размер */
-                transform: none !important; 
-                transition: none !important;
-                
-                /* Задаем фиксированный приятный размер для монитора */
-                width: 600px !important;
-                height: auto !important;
-                max-width: 80vw !important;
+                /* На ПК делаем картинку фиксированной и аккуратной */
+                max-width: 600px !important;
                 max-height: 80vh !important;
+                opacity: 1; /* На ПК пусть появляется сразу */
             }
         }
         
@@ -753,6 +750,7 @@
 </body>
 
 </html>
+
 
 
 
