@@ -7,6 +7,36 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <style>   
+        #image-modal {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed;
+            z-index: 9999; /* Поверх всего */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9); /* Темный фон */
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        
+        #full-image {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            /* Анимация появления */
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        /* Когда модалка открыта, картинка увеличивается до нормального размера */
+        #image-modal.active {
+            display: flex;
+        }
+        #image-modal.active #full-image {
+            transform: scale(1);
+        }
         /* Этот стиль внутри блока для изображения */
         .guide-img {
             width: 100%;           /* Растянуть на всю ширину блока */
@@ -297,7 +327,7 @@
 Убедительно рекомендуем сдавать ресы еженедельно, награда вкусная. 
 Ну а для броши богача, конечно, придется постараться и копить ресы минимум с год. 
 Рекомендации те же, следить за рейтингом, считать очки и вливать в воскресенье.</p>
-        <img src="patrikk.jpg" class="guide-img" alt="Item Image">
+        <img src="patrikk.jpg" class="guide-img" onclick="openImage(this.src)" style="cursor: zoom-in;">
     </div>
 
     <div id="calculator">
@@ -669,12 +699,27 @@
                 btn.innerText = 'Патрицио и ракушка';
             }
         }
+        function openImage(src) {
+            const modal = document.getElementById('image-modal');
+            const fullImg = document.getElementById('full-image');
+            fullImg.src = src; // Устанавливаем адрес картинки
+            modal.classList.add('active'); // Показываем
+        }
+        
+        function closeImage() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.remove('active'); // Скрываем
+        }
            
         window.onload = loadSavedData;
     </script>
+    <div id="image-modal" onclick="closeImage()">
+    <img id="full-image">
+</div>
 </body>
 
 </html>
+
 
 
 
