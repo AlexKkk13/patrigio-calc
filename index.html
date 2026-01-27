@@ -24,8 +24,8 @@
         }
         
         #full-image {
-            width: auto;           /* Позволяем картинке сохранять пропорции */
-            height: auto;
+            width: auto !important;           /* Позволяем картинке сохранять пропорции */
+            height: auto !important;
             max-width: 95%;        /* Для телефонов — почти на весь экран */
             max-height: 95%;
             border-radius: 10px;
@@ -34,11 +34,17 @@
             transform: scale(0.8);
             transition: transform 0.3s ease;
         }
+        /* Эффект увеличения при открытии  */
+        #image-modal.active #full-image {
+            transform: scale(1);
+        }
         /* Специальное правило для компьютеров (экраны шире 768px) */
         @media (min-width: 768px) {
-            #full-image {
-                max-width: 600px;  /* На компе картинка не будет шире 600 пикселей */
-                max-height: 80vh;  /* И не выше 80% от высоты экрана */
+            /* Уточняем путь, чтобы перебить любые другие стили */
+            #image-modal #full-image {
+                max-width: 500px !important; 
+                max-height: 500px !important;
+                object-fit: contain; /* Чтобы картинка не искажалась */
             }
         }
         /* Когда модалка открыта, картинка увеличивается до нормального размера */
@@ -744,6 +750,7 @@
 </body>
 
 </html>
+
 
 
 
