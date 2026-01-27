@@ -38,13 +38,18 @@
         #image-modal.active #full-image {
             transform: scale(1);
         }
-        /* Специальное правило для компьютеров (экраны шире 768px) */
+     
+        /* Правило для компьютеров */
         @media (min-width: 768px) {
-            /* Уточняем путь, чтобы перебить любые другие стили */
             #image-modal #full-image {
-                max-width: 500px !important; 
-                max-height: 500px !important;
-                object-fit: contain; /* Чтобы картинка не искажалась */
+                /* Жестко ограничиваем картинку на ПК */
+                max-width: 600px !important; 
+                max-height: 80vh !important;
+                margin: auto; 
+        
+                /* ОТКЛЮЧАЕМ масштабирование для ПК, чтобы не "скакало" */
+                transform: scale(1) !important; 
+                transition: none !important; 
             }
         }
         /* Когда модалка открыта, картинка увеличивается до нормального размера */
@@ -750,6 +755,7 @@
 </body>
 
 </html>
+
 
 
 
