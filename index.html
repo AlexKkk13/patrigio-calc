@@ -19,14 +19,26 @@
         }
         /* Скрываем гайд по умолчанию */
         #guide-content {
-            display: none;
+                    /* Фоновые настройки */
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 15px;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             color: #333;
+        
+            /* Настройки анимации */
+            overflow: hidden;           /* Прячем текст, когда блок свернут */
+            max-height: 0;              /* Изначально высота ноль */
+            opacity: 0;                 /* Полностью прозрачный */
+            padding: 0 20px;            /* Убираем вертикальные отступы при закрытии */
+            transition: all 0.5s ease;  /* Плавно меняем всё за 0.5 секунды */
+            margin-bottom: 0;
+        }
+        #guide-content.open {
+            max-height: 1000px;         /* Достаточная высота для текста */
+            opacity: 1;                 /* Становится видимым */
+            padding: 20px;              /* Возвращаем отступы */
+            margin-bottom: 20px;
         }
         
         :root {
@@ -629,21 +641,23 @@
             const guide = document.getElementById('guide-content');
             const btn = document.getElementById('guide-btn');
             
-            if (guide.style.display === 'none') {
-                guide.style.display = 'block';
+            // Переключаем класс "open"
+            guide.classList.toggle('open');
+            
+            // Меняем текст на кнопке
+            if (guide.classList.contains('open')) {
                 btn.innerText = '🔙 Вернуться к калькулятору';
             } else {
-                guide.style.display = 'none';
-                btn.innerText = 'Патрицио и ракушка';
-           
+                btn.innerText = '📖 Читать Гайды';
             }
         }
-
+           
         window.onload = loadSavedData;
     </script>
 </body>
 
 </html>
+
 
 
 
