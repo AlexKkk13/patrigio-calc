@@ -5,7 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">    
     <title>Калькулятор Патрицио</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>    
+    <style>   
+        /* Стили для кнопки гайдов */
+        .guide-toggle-btn {
+            width: 100%;
+            padding: 10px;
+            background: #3390ec;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        /* Скрываем гайд по умолчанию */
+        #guide-content {
+            display: none;
+            background: #fdfdfd;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
         :root {
             --bg: #0a0b0d;
             --card-bg: #121417;
@@ -236,6 +257,15 @@
     </style>
 </head>
 <body>
+    <button id="guide-btn" class="guide-toggle-btn" onclick="toggleGuide()">📖 Гайды</button>
+
+    <div id="guide-content">
+        <h2>Гайд по Патрицио</h2>
+        <p>ТЕСТ</p>
+    </div>
+
+    <div id="calculator">
+        </div>
     <h2>Максимальная еженедельная награда за 900к очков</h2>
     
     <div class="rewards-wrapper"> 
@@ -589,12 +619,25 @@
                 recalc();
             }
         }
+        function toggleGuide() {
+            const guide = document.getElementById('guide-content');
+            const btn = document.getElementById('guide-btn');
+            
+            if (guide.style.display === 'none') {
+                guide.style.display = 'block';
+                btn.innerText = '🔙 Вернуться к калькулятору';
+            } else {
+                guide.style.display = 'none';
+                btn.innerText = '📖 Читать Гайды';
+            }
+        }
 
         window.onload = loadSavedData;
     </script>
 </body>
 
 </html>
+
 
 
 
