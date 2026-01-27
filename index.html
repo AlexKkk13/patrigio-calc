@@ -19,6 +19,8 @@
             justify-content: center;
             align-items: center;
             cursor: zoom-out;
+            overflow: auto; /* Позволит прокручивать увеличенную картинку */
+            -webkit-overflow-scrolling: touch; /* Плавный скролл для iPhone */
         }
         
         #full-image {
@@ -68,9 +70,9 @@
         #guide-content {
         /* Фоновые настройки */
             background: linear-gradient(135deg, #5e5e5e, #787878) !important;
-            border: 1px solid #d1d1d1 !important;
+            border: 2px solid #000000 !important;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             color: #000 !important;
         
         /* Настройки анимации */
@@ -702,13 +704,27 @@
         function openImage(src) {
             const modal = document.getElementById('image-modal');
             const fullImg = document.getElementById('full-image');
-            fullImg.src = src; // Устанавливаем адрес картинки
-            modal.classList.add('active'); // Показываем
+            const viewport = document.querySelector('meta[name="viewport"]');
+        
+            fullImg.src = src;
+            modal.classList.add('active');
+        
+            // ВКЛЮЧАЕМ зум пальцами при открытии картинки
+            if (viewport) {
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=yes');
+            }
         }
         
         function closeImage() {
             const modal = document.getElementById('image-modal');
-            modal.classList.remove('active'); // Скрываем
+            const viewport = document.querySelector('meta[name="viewport"]');
+        
+            modal.classList.remove('active');
+        
+            // ВЫКЛЮЧАЕМ зум пальцами обратно, чтобы калькулятор не дергался
+            if (viewport) {
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, user-scalable=no');
+            }
         }
            
         window.onload = loadSavedData;
@@ -719,6 +735,7 @@
 </body>
 
 </html>
+
 
 
 
